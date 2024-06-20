@@ -152,6 +152,7 @@ func multiHandler(w http.ResponseWriter, r *http.Request) {
 
 	// return 500 status code with a 1/30 chance
 	if rand.Intn(20) == 0 {
+		span.AddEvent("Giving up, that was too hard", oteltrace.WithAttributes(attribute.String("reason", "too hard")))
 		slog.ErrorContext(ctx, "Giving up, that was too hard")
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(`{"message": "Internal Server Error"}`))
