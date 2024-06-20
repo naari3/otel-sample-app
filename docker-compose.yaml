@@ -5,7 +5,6 @@ x-default-logging: &logging
     max-file: "2"
     tag: "{{.Name}}"
 
-version: "3"
 services:
   app1:
     build:
@@ -23,6 +22,10 @@ services:
       - OTEL_EXPORTER_OTLP_TIMEOUT=5s
     ports:
       - "8080:8080"
+    develop:
+      watch:
+        - action: rebuild
+          path: "**/*.go"
 
   app2:
     build:
@@ -40,6 +43,10 @@ services:
       - OTEL_EXPORTER_OTLP_TIMEOUT=5s
     ports:
       - "8081:8081"
+    develop:
+      watch:
+        - action: rebuild
+          path: "**/*.go"
 
   jaeger:
     image: jaegertracing/all-in-one:1.57
