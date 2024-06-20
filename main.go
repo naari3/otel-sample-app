@@ -167,7 +167,7 @@ func multiHandler(w http.ResponseWriter, r *http.Request) {
 	err = func(ctx context.Context) error {
 		_, span := tracer.Start(ctx, "callAPI")
 		defer span.End()
-		req, err := http.NewRequest("GET", "http://"+apiServerHost+"/multi?left="+strconv.Itoa(multiOp.Left)+"&right="+strconv.Itoa(multiOp.Right), nil)
+		req, err := http.NewRequestWithContext(ctx, "GET", "http://"+apiServerHost+"/multi?left="+strconv.Itoa(multiOp.Left)+"&right="+strconv.Itoa(multiOp.Right), nil)
 		if err != nil {
 			return err
 		}
