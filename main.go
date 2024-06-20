@@ -127,6 +127,7 @@ func multiHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			return err
 		}
+		span.SetAttributes(attribute.Int("left", left), attribute.Int("right", right))
 		multiOp = MultiOp{Left: left, Right: right}
 		return nil
 	}()
