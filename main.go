@@ -57,7 +57,7 @@ func initTracer(ctx context.Context) error {
 		}
 	}
 
-	exporter, err := otlptracegrpc.New(ctx, otlptracegrpc.WithInsecure())
+	exporter, err := otlptracegrpc.New(ctx)
 	if err != nil {
 		return err
 	}
