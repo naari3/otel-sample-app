@@ -134,6 +134,7 @@ func multiHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		slog.ErrorContext(ctx, err.Error())
+		span.RecordError(err)
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(`{"message": "Invalid request"}`))
 		return
@@ -191,6 +192,7 @@ func multiHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		slog.ErrorContext(ctx, err.Error())
+		span.RecordError(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(`{"message": "Internal Server Error", "error": "` + err.Error() + `"}`))
 		return
